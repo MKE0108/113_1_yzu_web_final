@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d@0.2/landmark_grid.css" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.css" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pose.css') }}" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d@0.2/control_utils_3d.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.4/pose.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container">
+    <video class="input_video"></video>
+    <canvas class="output_canvas" width="640" height="480"></canvas>
+    <div class="loading">
+      <div class="spinner"></div>
+      <div class="message">
+        Loading
+      </div>
+    </div>
+    <div class="abs logo" style="display: flex;align-items: center;bottom: 10;right: 10px;">
+      <span class="poseResult">Null</span>
+    </div>
+  </div>
+  <div class="control-panel"></div>
+  <div class='square-box' display='none'>
+    <div class="landmark-grid-container" hidden></div>
+  </div>
+  <div id="popup" style="display: none;">
+    <div id="popupContent">
+      <p>Training in progress, please wait...</p>
+    </div>
+  </div>
+
+  
+  <script src="{{ url_for('static', filename='js/control_panel.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/pose.js') }}"></script>
+</body>
+</html>

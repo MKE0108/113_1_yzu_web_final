@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posture Analysis</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 26px;
+            text-align: center;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 30px;
+        }
+
+        .case-title {
+            font-size: 22px;
+            font-weight: lighter;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .case-title span {
+            font-weight: normal;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .line_chart {
+            flex: 0 0 70%;
+            min-width: 600px;
+        }
+
+        .pie_chart {
+            flex: 0 0 25%;
+            max-width: 300px;
+            max-height: 300px;
+        }
+
+        .divider {
+            height: 2px;
+            background-color: #ddd;
+            margin: 20px 0;
+        }
+
+        .good-duration {
+            color: green;
+            font-weight: bold;
+        }
+
+        .bad-duration {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Visual Representation of Your Posture Over Time</h2>
+    {% for chart in charts %}
+    <div class="case-title">
+        Case <span>#{{ chart.case_id }}</span> - 
+        Good Duration: <span class="good-duration">{{ chart.total_good_duration | round(0) }}s</span>, 
+        Bad Duration: <span class="bad-duration">{{ chart.total_bad_duration | round(0) }}s</span>
+    </div>
+    <div class="chart-container">
+        <div class="line_chart">
+            {{ chart.line_html | safe }}
+        </div>
+        <div class="pie_chart">
+            {{ chart.pie_html | safe }}
+        </div>
+    </div>
+    {% if not loop.last %}
+    <div class="divider"></div>
+    {% endif %}
+    {% endfor %}
+</body>
+</html>
